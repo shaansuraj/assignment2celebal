@@ -4,8 +4,29 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "method-override": "^3.0.0"
-  },
+  },"name": "assignment2celebal",
+  "version": "1.0.0",
+  "description": "A simple \"File Manager\" application using NodeJS",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "build": "echo \"Building the project...\" && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaansuraj/assignment2celebal.git"
+  },
+  "keywords": [
+    "file",
+    "manager",
+    "nodejs",
+    "celebal"
+  ],
+  "author": "Shaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaansuraj/assignment2celebal/issues"
+  },
+  "homepage": "https://github.com/shaansuraj/assignment2celebal#readme"
 }
