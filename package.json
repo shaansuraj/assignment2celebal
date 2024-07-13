@@ -4,5 +4,8 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "method-override": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
