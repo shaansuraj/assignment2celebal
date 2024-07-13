@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - File Manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-brand mb-0 h1">Dashboard - File Manager</span>
+        </nav>
+    </header>
+    <main class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="col-lg-3 col-md-4 sidebar">
+                <div class="list-group">
+                    <a href="#files" class="list-group-item list-group-item-action active">
+                        Files
+                    </a>
+                    <a href="#add-file" class="list-group-item list-group-item-action">
+                        Add File
+                    </a>
+                    <a href="#deleted-files" class="list-group-item list-group-item-action">
+                        Deleted Files
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <section class="col-lg-9 col-md-8 main-content">
+                <!-- Files Section -->
+                <div id="files" class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Files</h2>
+                        <% if (error) { %>
+                            <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
+                        <ul class="list-group list-group-flush">
+                            <% files.forEach(file => { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="/files/<%= file %>" target="_blank"><%= file %></a>
+                                    <form action="/files/<%= file %>?_method=DELETE" method="POST" class="delete-form">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Add File Section -->
+                <div id="add-file" class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Add File</h2>
+                        <form action="/files" method="POST" class="add-file-form">
+                            <div class="form-group">
+                                <label for="filename">Filename</label>
+                                <input type="text" class="form-control" id="filename" name="filename" placeholder="Enter Filename" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="filetype">File Type</label>
+                                <select class="form-control" id="filetype" name="filetype">
+                                    <option value="txt">Text File</option>
+                                    <option value="md">Markdown File</option>
+                                    <option value="json">JSON File</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea class="form-control" id="content" name="content" rows="5" placeholder="File content" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Create File</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Deleted Files Section -->
+                <div id="deleted-files" class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Deleted Files</h2>
+                        <ul class="list-group list-group-flush">
+                            <% deletedFiles.forEach(file => { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <%= file %>
+                                    <form action="/permanent-delete/<%= file %>" method="POST" class="delete-form">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete Permanently</button>
+                                    </form>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+</html>
